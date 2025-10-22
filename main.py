@@ -17,6 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/test")
+async def root():
+    return {"message": "FastAPI connected to MongoDB!"}
+
 @app.post("/notes", response_model=NoteOut)
 async def create_note_endpoint(note: NoteIn):
     doc = await crud.create_note(note.dict())
